@@ -18,10 +18,14 @@ def init2():
 def solver():   
     count = 0
     while (1):
-        tempWord = wordList.pop(int(len(wordList)/2))
+        try:
+            tempWord = wordList.pop(int(len(wordList)/2))
+        except:
+            print("Couldn't solve the word :(")
+            break
 
         if count == 0:
-            tempWord = 'salet'
+            tempWord = 'soare' #salet
 
         tempResult = sendKeysToParse(tempWord)
                 
@@ -38,61 +42,29 @@ def solver():
             removeList = []
                 
             if item == 2:
-                for item2 in wordList:
-                    if item2[count1] != tempWord[count1]:
-                        removeList.append(item2)
+                for word in wordList:
+                    if word[count1] != tempWord[count1]:
+                        removeList.append(word)
         
             elif item == 1:
-                for item2 in wordList:
-                    if currentLetter not in (item2):
-                        removeList.append(item2)
-                    if item2[count1] == tempWord[count1]:
-                        removeList.append(item2) 
+                for word in wordList:
+                    if currentLetter not in word:
+                        removeList.append(word)
+                    if word[count1] == tempWord[count1]:
+                        removeList.append(word) 
                  
             elif item == 0 and tempWord.count(currentLetter) == 1:
-                for item2 in wordList:
-                    if currentLetter in (item2):
-                        removeList.append(item2)
+                for word in wordList:
+                    if currentLetter in word:
+                        removeList.append(word)
 
-            for delete in removeList:
-                        wordList.remove(delete)
+            for deleteWord in removeList:
+                        wordList.remove(deleteWord)
 
             count1 += 1
         count += 1
-    time.sleep(5)
+    time.sleep(8)
     close()
-
 
 init2()
 solver()
-
-
-#14.5% failure with pop()
-#10%failure with pop(0)
-#3.1% failure with pop(0) and reverse
-
-
-
-
-
-
-
-
-
-"""
-def inWord(word,wordtocompare):
-    returnValue = []
-    word = list(word)
-    wordtocompare = list(wordtocompare)
-    count = 0
-    for letter in wordtocompare:
-        if letter == word[count]:
-            returnValue.append(2)
-        elif letter in word:
-            returnValue.append(1)
-        else:
-            returnValue.append(0)
-        count += 1
-
-    return returnValue
-"""
