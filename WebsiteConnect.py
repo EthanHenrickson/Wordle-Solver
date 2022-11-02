@@ -18,7 +18,7 @@ def sendKeysToParse(word):
     for item in word:
         elem.send_keys(item)
     elem.send_keys(Keys.RETURN)
-    time.sleep(4.5)
+    time.sleep(4.5) #Depending on internet speed this may need to be increased
     return color()
 
 def color():

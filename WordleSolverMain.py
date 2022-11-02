@@ -15,17 +15,24 @@ def init2():
             temp = temp[0]
             wordList.append(temp)
 
-def solver():   
+def solver():
+    
+    init2()
     count = 0
-    while (1):
+    totalAttempts = 0
+
+    while (totalAttempts/5 < 6):
         try:
             tempWord = wordList.pop(int(len(wordList)/2))
         except:
-            print("Couldn't solve the word :(")
+            print("That word must not be in my dictionary :(")
             break
 
         if count == 0:
-            tempWord = 'soare' #salet
+            tempWord = 'raise'
+
+        if count == 1:
+            tempWord = 'donut'
 
         tempResult = sendKeysToParse(tempWord)
                 
@@ -33,11 +40,11 @@ def solver():
             print(f"{count+1}, {tempWord}")
             break
 
-        print(tempWord)
-        print(tempResult, "\n")
+        print(tempWord, tempResult, "\n")
 
         count1 = 0
         for item in tempResult:
+            totalAttempts += 1
             currentLetter = tempWord[count1]
             removeList = []
                 
@@ -51,7 +58,7 @@ def solver():
                     if currentLetter not in word:
                         removeList.append(word)
                     if word[count1] == tempWord[count1]:
-                        removeList.append(word) 
+                        removeList.append(word)
                  
             elif item == 0 and tempWord.count(currentLetter) == 1:
                 for word in wordList:
@@ -63,8 +70,9 @@ def solver():
 
             count1 += 1
         count += 1
+    if totalAttempts/5 >= 6:
+        print("Sorry, I couldn't solve it in less than 6 attempts :(")
     time.sleep(8)
     close()
 
-init2()
 solver()
